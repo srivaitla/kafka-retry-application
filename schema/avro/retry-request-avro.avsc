@@ -1,0 +1,89 @@
+{
+  "type": "record",
+  "name": "RetryRequest",
+  "namespace": "com.nord.kafka.retry.dto",
+  "doc": "retry-service Request",
+  "fields": [
+    {
+      "name": "retryId",
+      "type": "string",
+      "doc": "Unique ID to track the each failed event."
+    },
+    {
+      "name": "consumerRecord",
+      "type": {
+        "type": "record",
+        "name": "ConsumerRecord",
+        "doc": "Consumer's details: consumer name, replyTopic, email and slack etc.",
+        "fields": [
+          {
+            "name": "name",
+            "type": "string",
+            "doc": "Unique consumer's name per service. Example: EAS, SPLIT, etc."
+          },
+          {
+            "name": "replyTopic",
+            "type": "string",
+            "doc": "Consumer's reply-topic for retry-service to publish the event back."
+          },
+          {
+            "name": "emailAddress",
+            "type": "string",
+            "doc": "Consumer's email address."
+          },
+          {
+            "name": "slackUrl",
+            "type": "string",
+            "doc": "Consumer's slack URL."
+          }
+        ]
+      }
+    },
+    {
+      "name": "sourceRecord",
+      "type": {
+        "type": "record",
+        "name": "SourceRecord",
+        "doc": "Source details, i.e. source name and headers, from where the event is published to consumer.",
+        "fields": [
+          {
+            "name": "name",
+            "type": "string",
+            "doc": "Name of the source where the event originated. Example: COT, DXTER etc."
+          },
+          {
+            "name": "headers",
+            "type": [
+              "null",
+              {
+                "type": "map",
+                "values": "string"
+              }
+            ],
+            "doc": "Kafka event Headers from the source to consumer."
+          }
+        ]
+      }
+    },
+    {
+      "name": "payloadRecord",
+      "type": {
+        "type": "record",
+        "name": "PayloadRecord",
+        "doc": "Consumer's Request Payload details.",
+        "fields": [
+          {
+            "name": "payload",
+            "type": "bytes",
+            "doc": "Consumer's AVRO request in byte[] format."
+          },
+          {
+            "name": "payloadClassName",
+            "type": "string",
+            "doc": "Consumer's AVRO request class name including namespace."
+          }
+        ]
+      }
+    }
+  ]
+}

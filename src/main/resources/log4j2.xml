@@ -1,0 +1,126 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Configuration status="WARN" monitorInterval="30">
+
+    <Properties>
+        <Property name="log-path">/Users/g67v/Source/git/git_learn/kafka-retry-application/logs</Property>
+        <Property name="archive-path">/Users/g67v/Source/git/git_learn/kafka-retry-application/logs/archive</Property>
+    </Properties>
+
+    <Appenders>
+
+        <Console name="consoleAppender" target="SYSTEM_OUT" follow="true">
+            <PatternLayout
+                    pattern="DateTime=%d{yyyy-MM-dd HH:mm:ss:SSS z}, Thread=[%.80t], Message=%m%n"/>
+            <Filters>
+                <ThresholdFilter level="DEBUG"/>
+            </Filters>
+        </Console>
+
+        <RollingFile name="fileLogAppender"
+                     fileName="${log-path}/serviceLogs.txt"
+                     filePattern="${archive-path}/serviceLogs.txt.%d{yyyy-MM-dd-hh-mm}.gz">
+            <PatternLayout
+                    pattern="DateTime=%d{yyyy-MM-dd HH:mm:ss:SSS z}, Thread=[%.80t], Message=%m%n"/>
+
+            <Filters>
+                <ThresholdFilter level="INFO"/>
+            </Filters>
+
+            <Policies>
+                <SizeBasedTriggeringPolicy size="1000KB"/>
+            </Policies>
+            <DefaultRolloverStrategy max="100"/>
+        </RollingFile>
+
+        <RollingFile name="consumerAppender"
+                     fileName="${log-path}/consumerLogs.txt"
+                     filePattern="${archive-path}/consumerLogs.txt.%d{yyyy-MM-dd-hh-mm}.gz">
+            <PatternLayout
+                    pattern="DateTime=%d{yyyy-MM-dd HH:mm:ss:SSS z}, Thread=[%.80t], Message=%m%n"/>
+
+            <Filters>
+                <ThresholdFilter level="INFO"/>
+            </Filters>
+
+            <Policies>
+                <SizeBasedTriggeringPolicy size="1000KB"/>
+            </Policies>
+            <DefaultRolloverStrategy max="100"/>
+        </RollingFile>
+
+        <RollingFile name="consumerProducerAppender"
+                     fileName="${log-path}/consumerProducerLogs.txt"
+                     filePattern="${archive-path}/consumerProducerLogs.txt.%d{yyyy-MM-dd-hh-mm}.gz">
+            <PatternLayout
+                    pattern="DateTime=%d{yyyy-MM-dd HH:mm:ss:SSS z}, Thread=[%.80t], Message=%m%n"/>
+
+            <Filters>
+                <ThresholdFilter level="INFO"/>
+            </Filters>
+
+            <Policies>
+                <SizeBasedTriggeringPolicy size="1000KB"/>
+            </Policies>
+            <DefaultRolloverStrategy max="100"/>
+        </RollingFile>
+
+        <RollingFile name="producerAppender"
+                     fileName="${log-path}/producerLogs.txt"
+                     filePattern="${archive-path}/producerLogs.txt.%d{yyyy-MM-dd-hh-mm}.gz">
+            <PatternLayout
+                    pattern="DateTime=%d{yyyy-MM-dd HH:mm:ss:SSS z}, Thread=[%.80t], Message=%m%n"/>
+
+            <Filters>
+                <ThresholdFilter level="INFO"/>
+            </Filters>
+
+            <Policies>
+                <SizeBasedTriggeringPolicy size="1000KB"/>
+            </Policies>
+            <DefaultRolloverStrategy max="100"/>
+        </RollingFile>
+
+    </Appenders>
+    <Loggers>
+
+        <Logger name="com.nord.kafka.retry.application.consumer.RetryKafkaConsumer" additivity="false"
+                level="INFO">
+            <AppenderRef ref="consoleAppender"/>
+            <AppenderRef ref="consumerAppender"/>
+            <AppenderRef ref="consumerProducerAppender"/>
+        </Logger>
+
+        <Logger name="com.nord.kafka.retry.application.consumer.RetryKafkaConsumer1" additivity="false"
+                level="INFO">
+            <AppenderRef ref="consoleAppender"/>
+            <AppenderRef ref="consumerAppender"/>
+            <AppenderRef ref="consumerProducerAppender"/>
+        </Logger>
+
+        <Logger name="com.nord.kafka.retry.application.consumer.RetryKafkaConsumer2" additivity="false"
+                level="INFO">
+            <AppenderRef ref="consoleAppender"/>
+            <AppenderRef ref="consumerAppender"/>
+            <AppenderRef ref="consumerProducerAppender"/>
+        </Logger>
+
+        <Logger name="com.nord.kafka.retry.application.consumer.RetryKafkaConsumer3" additivity="false"
+                level="INFO">
+            <AppenderRef ref="consoleAppender"/>
+            <AppenderRef ref="consumerAppender"/>
+            <AppenderRef ref="consumerProducerAppender"/>
+        </Logger>
+
+        <Logger name="com.nord.kafka.retry.application.producer.RetryKafkaProducer" additivity="false"
+                level="INFO">
+            <AppenderRef ref="consoleAppender"/>
+            <AppenderRef ref="producerAppender"/>
+            <AppenderRef ref="consumerProducerAppender"/>
+        </Logger>
+
+        <Root level="INFO">
+            <AppenderRef ref="consoleAppender"/>
+            <AppenderRef ref="fileLogAppender"/>
+        </Root>
+    </Loggers>
+</Configuration>

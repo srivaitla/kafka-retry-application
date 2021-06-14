@@ -1,0 +1,42 @@
+{
+  "type": "record",
+  "name": "ConsumerProfileRequest",
+  "namespace": "com.nord.kafka.consumer.dto",
+  "fields": [
+    {
+      "name": "profileId",
+      "type": "string"
+    },
+    {
+      "name": "address",
+      "type": {
+        "type": "array",
+        "items": {
+          "type": "record",
+          "name": "AddressRecord",
+          "fields": [
+            {
+              "name": "state",
+              "type": "string"
+            },
+            {
+              "name": "country",
+              "type": "string"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "name": "date",
+      "type": "string"
+    },
+    {
+      "name": "additionalAttributes",
+      "type": {
+          "type": "map",
+          "values": "string"
+        }
+    }
+  ]
+}

@@ -1,0 +1,50 @@
+{
+  "type": "record",
+  "name": "ConsumerNotificationRequest",
+  "namespace": "com.nord.kafka.consumer.dto",
+  "fields": [
+    {
+      "name": "notificationId",
+      "type": "string"
+    },
+    {
+      "name": "notification",
+      "type": {
+        "type": "enum",
+        "name": "NotificationType",
+        "namespace": "com.nord.kafka.consumer.constants",
+        "symbols": [
+          "EMAIL",
+          "SMS",
+          "PUSH"
+        ]
+      },
+      "default": "EMAIL"
+    },
+    {
+      "name": "items",
+      "type": {
+        "type": "array",
+        "items": {
+          "type": "record",
+          "name": "ItemsRecord",
+          "fields": [
+            {
+              "name": "name",
+              "type": "string"
+            },
+            {
+              "name": "quantity",
+              "type": "int"
+            },
+            {
+              "name": "available",
+              "type": "boolean",
+              "default": true
+            }
+          ]
+        }
+      }
+    }
+  ]
+}
